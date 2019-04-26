@@ -11,7 +11,7 @@ BASE_DIR = os.getcwd()
 
 class Loop(QThread):
     def run(self):
-        for i in range(100):
+        for i in range(100000):
             print(f"{i}: Estamos no loop")
 
 

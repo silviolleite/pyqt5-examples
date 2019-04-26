@@ -1,8 +1,8 @@
 import os
 import sys
 
-from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QPixmap, QIcon
+from PyQt5.QtCore import Qt, QPoint
+from PyQt5.QtGui import QPixmap, QIcon, QPainter, QFont, QPen
 from PyQt5.QtWidgets import QLabel, QApplication, QFileDialog, QWidget
 
 BASE_DIR = os.getcwd()
@@ -34,7 +34,18 @@ class HandlerWindow(QWidget):
         self.resize(300, 350)
         self.label = CustomLabel(self)
         self.setWindowIcon(QIcon(f"{BASE_DIR}/static/logo.png"))
-        self.label.setPixmap(QPixmap(f"{BASE_DIR}/static/logo.png").scaled(250, 150, Qt.KeepAspectRatio))
+
+        painter = QPainter(self)
+        pixmap = QPixmap(f"{BASE_DIR}/static/logo.png").scaled(250, 150, Qt.KeepAspectRatio)
+
+        painter.begin(pixmap)
+        painter.setFont(QFont("Arial"))
+        pen = QPen(Qt.white, 3)
+        painter.setPen(pen)
+        painter.drawText(QPoint(10, 10), "Hello")
+        painter.drawText(QPoint(10, 50), "teste")
+        painter.end()
+        self.label.setPixmap(pixmap)
 
 
 if __name__ == '__main__':
